@@ -1,0 +1,12 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{pdfpages,eso-pic}
+
+\begin{document}
+	\includepdf[pages={1-2}]{blank_pdf.pdf}
+
+	\includepdf[pages=3, pagecommand={%
+	  \begin{picture}(0,0)
+	    \put(130,-300){\includegraphics[width=0.25\textwidth]{test_output.png}}
+	  \end{picture}
+	}]{blank_pdf.pdf}
+\end{document}
