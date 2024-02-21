@@ -4,7 +4,7 @@ import argparse
 
 
 # define function
-def convert_to_transparent(image_path, output_path, threshold):
+def convert_to_transparent(image_path, output_path, threshold=170, increase_blue=True):
     # Load the image
     img = Image.open(image_path)
     img = img.convert("RGBA")  # Ensure image is in RGBA mode to handle transparency
@@ -19,6 +19,14 @@ def convert_to_transparent(image_path, output_path, threshold):
             # If the pixel is lighter than the threshold, make it transparent
             if luminance >= threshold:
                 pixels[i, j] = (255, 255, 255, 0)  # Set to transparent
+            else: # make it more blue
+                if increase_blue == True:
+                    pixels[i, j] = (
+                        pixels[i, j][0], 
+                        pixels[i, j][1], 
+                        min(pixels[i, j][2] + 50, 255), 
+                        pixels[i, j][3]
+                    )
 
     # Save the modified image with a transparent background
     img.save(output_path, "PNG")
@@ -38,5 +46,5 @@ if __name__ == "__main__":
     convert_to_transparent(
         main_path / args.input_file, 
         main_path / args.output_file, 
-        threshold=100
+        threshold=170
     )

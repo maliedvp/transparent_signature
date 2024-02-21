@@ -4,9 +4,10 @@
 \begin{document}
 	\includepdf[pages={1-2}]{blank_pdf.pdf}
 
-	\includepdf[pages=3, pagecommand={%
+	\thispagestyle{empty} % Suppress page number on the third page
+	\includepdf[pages={3}, pagecommand={%
 	  \begin{picture}(0,0)
-	    \put(130,-300){\includegraphics[width=0.25\textwidth]{test_output.png}}
+	    \put(80,-300){\includegraphics[width=0.5\textwidth]{test_output.png}}
 	  \end{picture}
 	}]{blank_pdf.pdf}
 \end{document}
